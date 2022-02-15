@@ -22,7 +22,7 @@ fi
 
 # terminal color settings
   CLICOLOR=1
-  export EDITOR="nvim"
+  export EDITOR="vi"
   [[ $TMUX != "" ]] && export TERM="screen-256color"
 
 # shell aliases
@@ -34,7 +34,9 @@ fi
   alias ll="ls -la"
   alias g='git'
   alias mkcd='mkdir $1 && cd $1'
-  alias vi=nvim
+  alias ..="cd ../"
+  alias ...="cd ../../"
+  alias ....="cd ../../../"
 
 # git aliases
   alias gap='git add -p'
@@ -116,3 +118,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rmv/bin"
