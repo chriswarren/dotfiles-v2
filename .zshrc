@@ -7,7 +7,7 @@ fi
 
 # zsh
   export ZSH=$HOME/.oh-my-zsh
-  export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+  export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:/opt/homebrew/sbin
   HYPHEN_INSENSITIVE=true
   COMPLETION_WAITING_DOTS=true
   ZSH_DISABLE_COMPFIX=true
@@ -99,8 +99,8 @@ fi
   }
 
 # version management
-  source /usr/local/opt/asdf/asdf.sh
-  export PATH="$HOME/.asdf/shims:$PATH"
+#  source /usr/local/opt/asdf/asdf.sh
+#  export PATH="$HOME/.asdf/shims:$PATH"
 
 # ruby
   export ARCHFLAGS='-arch x86_64'
@@ -114,7 +114,7 @@ fi
 # secrets
 # source ~/.secrets
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
