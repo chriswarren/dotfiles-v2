@@ -23,13 +23,14 @@
   snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
   recommit = commit --amend --no-edit
   yolo = push --force
+  gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
 [branch]
   autosetuprebase = always
 [color]
   ui = auto
 [core]
   excludesfile = ~/.cvsignore
-  editor = vi
+  editor = nvim
   whitespace = warn
 [help]
   autocorrect = 10

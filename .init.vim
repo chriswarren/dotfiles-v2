@@ -1,42 +1,40 @@
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+"
 " Dependencies
 let g:loaded_python_provider = 0
 let g:python3_host_prog = '/usr/bin/python3'
 
 " Plugins
-  call plug#begin()
-    Plug 'dracula/vim' "Colorscheme
-    Plug 'kien/ctrlp.vim' "fuzzy file finder
-    Plug 'jremmen/vim-ripgrep' "Search with RipGrep
-    Plug 'JamshedVesuna/vim-markdown-preview' "Markdown Preview
-    Plug 'edkolev/tmuxline.vim' "idk -
-    Plug 'vim-airline/vim-airline' "useful information like powerline
-    Plug 'christoomey/vim-tmux-navigator' "navigate vim splits and tmux panes with ease
-    Plug 'ryanoasis/vim-devicons' "filetype glyphs
-    Plug 'rondale-sc/vim-spacejam' "remove trailing whitespace
-    Plug 'tpope/vim-commentary' "comment stuff out
-    Plug 'tpope/vim-rails' "rails tools
-    Plug 'tpope/vim-surround' "quoting/parenthesizing
-    Plug 'tpope/vim-fugitive' "git tooling
-    Plug 'tpope/vim-rhubarb' "git browse
-    Plug 'tpope/vim-endwise' "wisely add `end`
-    Plug 'vim-ruby/vim-ruby' "ruby tooling
-    Plug 'scrooloose/nerdtree' "File Tree
-    Plug 'tpope/vim-unimpaired' "set paste, etc.
-    Plug 'vim-syntastic/syntastic' "Syntax checking
-    Plug 'neoclide/coc.nvim', {'branch': 'release'} "Conquorer of Completion
-    Plug 'iberianpig/tig-explorer.vim' "tig exploter
-  let g:coc_global_extensions = [
-    'coc-emmet',
-    'coc-css',
-    'coc-eslint',
-    'coc-html',
-    'coc-json',
-    'coc-prettier',
-    'coc-tsserver',
-    'coc-snippets',
-    'coc-solargraph'
-  ]
-  call plug#end()
+call plug#begin()
+  Plug 'dracula/vim' "Colorscheme
+  Plug 'kien/ctrlp.vim' "fuzzy file finder
+  Plug 'jremmen/vim-ripgrep' "Search with RipGrep
+  Plug 'JamshedVesuna/vim-markdown-preview' "Markdown Preview
+  Plug 'edkolev/tmuxline.vim' "idk -
+  Plug 'vim-airline/vim-airline' "useful information like powerline
+  Plug 'christoomey/vim-tmux-navigator' "navigate vim splits and tmux panes with ease
+  Plug 'ryanoasis/vim-devicons' "filetype glyphs
+  Plug 'rondale-sc/vim-spacejam' "remove trailing whitespace
+  Plug 'tpope/vim-commentary' "comment stuff out
+  Plug 'tpope/vim-rails' "rails tools
+  Plug 'tpope/vim-surround' "quoting/parenthesizing
+  Plug 'tpope/vim-fugitive' "git tooling
+  Plug 'tpope/vim-rhubarb' "git browse
+  Plug 'tpope/vim-endwise' "wisely add `end`
+  Plug 'vim-ruby/vim-ruby' "ruby tooling
+  Plug 'scrooloose/nerdtree' "File Tree
+  Plug 'tpope/vim-unimpaired' "set paste, etc.
+  Plug 'vim-syntastic/syntastic' "Syntax checking
+  Plug 'iberianpig/tig-explorer.vim' "tig explorer
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'mileszs/ack.vim'
+  Plug 'pechorin/any-jump.vim'
+  Plug 'nvim-lua/plenary.nvim' "telescope dep
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} "telescope dep
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' } " file finding
+call plug#end()
 
 " Theme
   if (has("termguicolors"))
@@ -105,6 +103,16 @@ set colorcolumn=80               " set a column at 80 chars
   nnoremap tc :tabclose<CR>
   nnoremap tn :tabnew<CR>
 
+" disable arrow navigation keys
+  inoremap  <Up>    <NOP>
+  inoremap  <Down>  <NOP>
+  inoremap  <Left>  <NOP>
+  inoremap  <Right> <NOP>
+  noremap   <Up>    <NOP>
+  noremap   <Down>  <NOP>
+  noremap   <Left>  <NOP>
+  noremap   <Right> <NOP>
+
 " Quick write, quit, write + quit, quit all
   nnoremap <Leader>w :w<CR>
   nnoremap <Leader>q :q<CR>
@@ -159,6 +167,18 @@ function! QuickfixFilenames()
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
 
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" AnyJump
+
+let g:any_jump_disable_default_keybindings = 1
+" Use AnyJump to search for the word under the cursor
+nnoremap <leader><bs> :AnyJump <cr>
+
 " ripgrep
 " " Use ripgrep for searching ⚡️
 " Options include:
@@ -166,7 +186,7 @@ endfunction
 " --type-not sql -> Avoid huge sql file dumps as it slows down the search
 " --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
   let g:rgcommand = 'rg --vimgrep --type-not sql --smart-case'
-  nnoremap <leader><bs> :Rg '\b<c-r><c-w>\b'<cr>
+  " nnoremap <leader><bs> :Rg '\b<c-r><c-w>\b'<cr>
   nnoremap <leader>a :Rg<space>
 
 " NERDTree configuration

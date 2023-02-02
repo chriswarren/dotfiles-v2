@@ -22,8 +22,11 @@ fi
 
 # terminal color settings
   CLICOLOR=1
-  export EDITOR="vi"
+  export EDITOR="nvim"
   [[ $TMUX != "" ]] && export TERM="screen-256color"
+  
+  alias vi=$EDITOR
+  alias vim=$EDITOR
 
 # shell aliases
   alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
@@ -63,6 +66,13 @@ fi
   alias gsm='git switch main && git pull --rebase'
   alias reset-authors='git commit --amend --reset-author -C HEAD'
 
+# project aliases
+  alias workzone='tmuxinator start tce-dev'
+
+# standardrb aliases
+  alias stdn='rm -f .standard_todo.yml && bundle exec standardrb --generate-todo'
+  alias stdtmp='mv .standard_todo.yml .standard_todo.tmp'
+  alias stdc='cat .standard_todo.tmp | grep "  - " | sort | uniq -c | sort -n'
 
 # shell functions
   function move-last-download {
@@ -103,13 +113,13 @@ fi
 #  export PATH="$HOME/.asdf/shims:$PATH"
 
 # ruby
-  export ARCHFLAGS='-arch x86_64'
   export CC=gcc
   alias be='bundle exec'
 
 # import local zsh customizations, if present
   zrcl="$HOME/.zshrc.local"
   [[ ! -a $zrcl ]] || source $zrcl
+
 
 # secrets
 # source ~/.secrets
